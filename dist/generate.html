@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="generateApp">
+
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Google Map embedding code: Generating</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="styles/main.ba6e3187c39d3c354d79.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <!--header-->
+    <header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <div class="page-header text-center">
+                <h1>Generating Google Map Embedded Code</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    </header>
+    <!--endheader-->
+    <!--navbar-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+        <!-- mobile view -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Mnavbar" >
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">GGMEC</a>
+            </div>
+        <!-- end mobile view -->
+    
+
+    <!-- nav links -->
+            <div id="Mnavbar" class="collapse navbar-collapse" style="text-align: center;">  
+            <ul class="nav navbar-nav" style="display: inline-block;float: none;">
+                <li class="active"><a href="generate.html">Generating Code</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    <!-- end nav links -->
+      
+    </nav>
+    <!-- end navbar -->
+
+
+
+    <div class="container">
+        <!-- Input fomular -->
+        <div class="row row-content" ng-controller="inputController">
+                <!-- Code Text -->
+            <div id="codetext" class="modal fade" role="dialog">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Your Code Here</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                                <p>
+                                    <code>
+                                        &lt;script src='https://maps.googleapis.com/maps/api/js?v=3.exp'&gt;&lt;&frasl;script&gt;
+                                        &lt;div style='overflow:hidden;height:{{heightvalue}}px;width:{{widthvalue}}px;'&gt;
+                                            &lt;div id='gmap_canvas' style='height:{{heightvalue}}px;width:{{widthvalue}}px;'&gt;&lt;&frasl;div&gt;
+
+                                            &lt;style&gt;#gmap_canvas img{max-width:none!important;background:none!important}&lt;&frasl;style&gt;
+                                        &lt;&frasl;div&gt;
+                                        &lt;script type='text/javascript'&gt;
+                                            function init_map(){
+                                                var myOptions = {
+                                                    zoom:10,
+                                                    center:new google.maps.LatLng(YOUR_LAT,YOUR_LNG),
+                                                    mapTypeId: google.maps.MapTypeId.ROADMAP};
+                                                    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                                    marker = new google.maps.Marker({
+                                                        map: map,
+                                                        position: new google.maps.LatLng(YOUR_LAT,YOUR_LNG)});
+                                                    infowindow = new google.maps.InfoWindow({
+                                                        content:'&lt;strong&gt;{{titlevalue}}&lt;&frasl;strong&gt;&lt;br&gt;{{addressvalue}}&lt;br&gt;'});
+                                                google.maps.event.addListener(marker, 'click', function(){
+                                                    infowindow.open(map,marker);});
+                                                infowindow.open(map,marker);}
+                                            google.maps.event.addDomListener(window, 'load', init_map);
+                                        &lt;&frasl;script&gt;
+                                    </code>
+                                </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endCode text -->
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <h3>Input the key infomation:</h3>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 col-sm-offset-2 control-label">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="titlevalue" class="form-control" id="title" name="title" placeholder="Enter Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 col-sm-offset-2 control-label">Address</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="addressvalue" class="form-control" id="address" name="address" value="Munich, Germany" placeholder="Enter Address">
+                            <div>{{latvalue}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="height" class="col-sm-2 col-sm-offset-2 control-label">Height</label>
+                        <div class="col-sm-8">
+                            <input type="number" ng-model="heightvalue" class="form-control" id="height" name="height" placeholder="Enter Height">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="width" class="col-sm-2 col-sm-offset-2 control-label">Width</label>
+                        <div class="col-sm-8">
+                            <input type="number" ng-model="widthvalue" class="form-control" id="width" name="width" placeholder="Enter Width">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="button" class="btn btn-primary" id="getCode" value="Geocode">Get your Code</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- end Fomular -->
+            </div>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <div id="Nmap" style="width:500px;height:380px;"></div>
+            </div>
+        </div>
+        <!-- map -->
+        <!-- <div class="row row-content"> 
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <div id="Gmap" style="width:500px;height:380px;"></div>
+            </div>
+        </div> -->
+
+    </div>
+
+
+
+
+</body>
+<script src="scripts/main.js"></script>
+<script>        
+    //codetext pop out
+    $(document).ready(function(){
+        $('#getCode').click(function(){
+            $('#codetext').modal('toggle');
+        });
+    });
+</script>
+
+<!-- <script src="http://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js"></script> -->
+<!-- <script>
+    var app = angular.module('generateApp',[]);
+    app.controller('inputController', ['$scope', function($scope) {
+        $scope.titlevalue = 'Title';
+        $scope.addressvalue = 'Munich, Germany';
+        $scope.heightvalue = '500';
+        $scope.widthvalue = '380';
+        
+//google maps
+
+        var geocoder = new google.maps.Geocoder();
+        var mapProp = {
+            zoom:10,
+            center: new google.maps.LatLng(48.1351253, 11.581980599999952),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        $scope.map = new google.maps.Map(document.getElementById('Nmap'), mapProp);
+        
+        var marker = new google.maps.Marker({
+                map: $scope.map,
+                position: new google.maps.LatLng(48.1351253,11.581980599999952)
+            });
+        var infowindow = new google.maps.InfoWindow({
+                content:'<strong>' + $scope.titlevalue + '</strong>' + '<br>' + $scope.addressvalue + '<br>' //Home 地址要改
+            });
+        google.maps.event.addListener(marker, 'click', function(){
+                $scope.infowindow.open(map,marker);});
+        infowindow.open($scope.map,marker);
+
+
+        
+        document.getElementById('getCode').addEventListener('click', function() {
+            geocodeAddress(geocoder, $scope.map);
+
+        });
+
+
+
+
+        var geocodeAddress = function(geocoder, resultsMap){
+            geocoder.geocode({'address': $scope.addressvalue}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                resultsMap.setCenter(results[0].geometry.location);
+                
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+                
+                if (infowindow) {
+                    infowindow.close();
+                }
+                infowindow = new google.maps.InfoWindow({
+                    content:'<strong>' + $scope.titlevalue + '</strong><br>' + $scope.addressvalue + '<br>Lat:' + results[0].geometry.location.lat() + '<br>Lng:' + results[0].geometry.location.lng()
+                });
+                google.maps.event.addListener(marker, 'click', function(){
+                    infowindow.open(resultsMap,marker);});
+                infowindow.open(resultsMap,marker);
+
+                
+                
+                
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+  });
+            
+        };
+        $(document).ready(function(){
+        $('#getCode').click(function(){
+            $('#codetext').modal('toggle');
+        });
+    });
+        
+
+//end google maps
+    }]);
+</script> -->
+<!-- <script>
+//Code Generator pop out
+    $(document).ready(function(){
+        $('#getCode').click(function(){
+            $('#codetext').modal('toggle');
+        });
+    });
+</script> -->
+
+
+
+<!-- <script>
+    function initialize()
+    {
+        //configure the map
+        var mapOptions = {
+          center:new google.maps.LatLng(48.1351253,11.581980599999952),
+          zoom:10,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+          };
+          // create new map
+        var map=new google.maps.Map(document.getElementById("Gmap")
+          ,mapOptions);
+        // add geocoder to analyse address
+        var geocoder = new google.maps.Geocoder();
+        document.getElementById('getCode').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+        });
+        // Add Info Window above the address
+        var marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(48.1351253,11.581980599999952)
+            });
+        var infowindow = new google.maps.InfoWindow({
+                content:'<strong>Munich</strong><br>Munich, Germany<br>' //Home 地址要改
+            });
+        google.maps.event.addListener(marker, 'click', function(){
+                infowindow.open(map,marker);});
+        infowindow.open(map,marker);
+        }
+
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+                if (infowindow) {
+                    infowindow.close();
+                }
+                infowindow = new google.maps.InfoWindow({
+                    content:'good'
+                });
+                google.maps.event.addListener(marker, 'click', function(){
+                    infowindow.open(resultsMap,marker);});
+                infowindow.open(resultsMap,marker);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+  });
+}
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+ -->
+
+</html>

@@ -1,0 +1,99 @@
+<div class="container">
+        <!-- Input fomular -->
+        <div class="row row-content" ng-controller="inputController">
+                <!-- Code Text -->
+            <div id="codetext" class="modal fade" role="dialog">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Your Code Here</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                                <p>
+                                    <code>
+                                        &lt;script src='https://maps.googleapis.com/maps/api/js?v=3.exp'&gt;&lt;&frasl;script&gt;
+                                        &lt;div style='overflow:hidden;height:{{heightvalue}}px;width:{{widthvalue}}px;'&gt;
+                                            &lt;div id='gmap_canvas' style='height:{{heightvalue}}px;width:{{widthvalue}}px;'&gt;&lt;&frasl;div&gt;
+
+                                            &lt;style&gt;#gmap_canvas img{max-width:none!important;background:none!important}&lt;&frasl;style&gt;
+                                        &lt;&frasl;div&gt;
+                                        &lt;script type='text/javascript'&gt;
+                                            function init_map(){
+                                                var myOptions = {
+                                                    zoom:10,
+                                                    center:new google.maps.LatLng(YOUR_LAT,YOUR_LNG),
+                                                    mapTypeId: google.maps.MapTypeId.ROADMAP};
+                                                    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                                    marker = new google.maps.Marker({
+                                                        map: map,
+                                                        position: new google.maps.LatLng(YOUR_LAT,YOUR_LNG)});
+                                                    infowindow = new google.maps.InfoWindow({
+                                                        content:'&lt;strong&gt;{{titlevalue}}&lt;&frasl;strong&gt;&lt;br&gt;{{addressvalue}}&lt;br&gt;'});
+                                                google.maps.event.addListener(marker, 'click', function(){
+                                                    infowindow.open(map,marker);});
+                                                infowindow.open(map,marker);}
+                                            google.maps.event.addDomListener(window, 'load', init_map);
+                                        &lt;&frasl;script&gt;
+                                    </code>
+                                </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- endCode text -->
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <h3>Input the key infomation:</h3>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 col-sm-offset-2 control-label">Title</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="titlevalue" class="form-control" id="title" name="title" placeholder="Enter Title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-sm-2 col-sm-offset-2 control-label">Address</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="addressvalue" class="form-control" id="address" name="address" value="Munich, Germany" placeholder="Enter Address">
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="height" class="col-sm-2 col-sm-offset-2 control-label">Height</label>
+                        <div class="col-sm-8">
+                            <input type="number" ng-model="heightvalue" class="form-control" id="height" name="height" placeholder="Enter Height">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="width" class="col-sm-2 col-sm-offset-2 control-label">Width</label>
+                        <div class="col-sm-8">
+                            <input type="number" ng-model="widthvalue" class="form-control" id="width" name="width" placeholder="Enter Width">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <button type="button" class="btn btn-primary" id="getCode" value="Geocode">Get your Code</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- end Fomular -->
+            </div>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <div id="Nmap" style="width:500px;height:380px;"></div>
+            </div>
+        </div>
+        <!-- map -->
+        <!-- <div class="row row-content"> 
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <div id="Gmap" style="width:500px;height:380px;"></div>
+            </div>
+        </div> -->
+
+    </div>
+
+
